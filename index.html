@@ -3,23 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Molecule Sketcher (Ketcher) + ChatGPT</title>
+
+  <!-- Include Ketcher styles -->
+  <link rel="stylesheet" href="https://lifescience.opensource.epam.com/ketcher/css/ketcher.min.css" />
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Include Ketcher JS -->
   <script src="https://lifescience.opensource.epam.com/ketcher/ketcher.min.js"></script>
 </head>
 <body>
   <h2>🧪 Molecule Sketcher (Ketcher) + ChatGPT</h2>
-  <div id="ketcher"></div>
+
+  <!-- Main container for the sketcher UI -->
+  <div id="ketcher" class="ketcher-container"></div>
+
   <button onclick="exportMol()">Export Molfile</button>
   <button onclick="exportSmiles()">Export SMILES</button>
+
   <h3>Output:</h3>
   <textarea id="output" readonly></textarea>
 
   <script>
     let ketcher;
     window.onload = async () => {
-      const element = document.getElementById('ketcher');
-      ketcher = await Ketcher.create(element, {
-        resourcesUrl: 'https://lifescience.opensource.epam.com/ketcher',
+      ketcher = await Ketcher.create(document.getElementById('ketcher'), {
+        resourcesUrl: 'https://lifescience.opensource.epam.com/ketcher'
       });
     };
 
