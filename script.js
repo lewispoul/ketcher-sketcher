@@ -1,19 +1,18 @@
-let ketcher;
-window.onload = async () => {
-  const options = {
-    resourcesUrl: 'https://lifescience.opensource.epam.com/ketcher'
-  };
-  ketcher = await Ketcher.create(document.getElementById('ketcher'), options);
-};
+let jsmeApplet;
+
+function jsmeOnLoad() {
+  // Called automatically by JSME when ready
+  jsmeApplet = new JSApplet.JSME("jsmediv", "800px", "500px");
+}
 
 function exportMol() {
-  ketcher.getMolfile().then(molfile => {
-    document.getElementById('output').value = molfile;
-  });
+  if (jsmeApplet) {
+    document.getElementById('output').value = jsmeApplet.getMolfile();
+  }
 }
 
 function exportSmiles() {
-  ketcher.getSmiles().then(smiles => {
-    document.getElementById('output').value = smiles;
-  });
+  if (jsmeApplet) {
+    document.getElementById('output').value = jsmeApplet.getSmiles();
+  }
 }
