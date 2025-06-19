@@ -2,46 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ketcher Demo (Safe Load)</title>
-
-  <!-- Load working version of Ketcher (from jsDelivr) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/epam/ketcher@latest/dist/ketcher.min.css" />
-  <script src="https://cdn.jsdelivr.net/gh/epam/ketcher@latest/dist/ketcher.min.js"></script>
-
+  <title>Molecule Sketcher (JSME) + ChatGPT</title>
+  <script src="https://unpkg.com/jsme-editor@latest/jsme/jsme.nocache.js"></script>
   <style>
     body { font-family: sans-serif; margin: 20px; }
-    #ketcher { width: 800px; height: 500px; border: 1px solid #ccc; }
-    button { margin-top: 10px; margin-right: 10px; }
-    textarea { width: 800px; height: 120px; margin-top: 20px; }
+    #jsmediv { border: 1px solid #ccc; width: 800px; height: 500px; }
+    button { margin-top: 10px; padding: 8px 12px; }
+    textarea { width: 800px; height: 120px; margin-top: 10px; }
   </style>
 </head>
 <body>
-  <h2>🧪 Molecule Sketcher (Ketcher) + ChatGPT</h2>
-  <div id="ketcher"></div>
+  <h2>🧪 Molecule Sketcher (JSME) + ChatGPT</h2>
+  <div id="jsmediv"></div>
   <button onclick="exportMol()">Export Molfile</button>
   <button onclick="exportSmiles()">Export SMILES</button>
+
   <h3>Output:</h3>
   <textarea id="output" readonly></textarea>
 
   <script>
-    let ketcher;
-    window.onload = async () => {
-      const element = document.getElementById('ketcher');
-      ketcher = await Ketcher.create(element, {
-        resourcesUrl: 'https://cdn.jsdelivr.net/gh/epam/ketcher@latest/dist'
-      });
-    };
+    let jsmeApplet;
+    function jsmeOnLoad() {
+      // Initialize on-load function for JSME
+      jsmeApplet = new JSApplet.JSME("jsmediv", "800px", "500px");
+    }
 
     function exportMol() {
-      ketcher.getMolfile().then(mol => {
-        document.getElementById('output').value = mol;
-      });
+      if (jsmeApplet) {
+        document.getElementById('output').value = jsmeApplet.getMolfile();
+      }
     }
 
     function exportSmiles() {
-      ketcher.getSmiles().then(smiles => {
-        document.getElementById('output').value = smiles;
-      });
+      if (jsmeApplet) {
+        document.getElementById('output').value = jsmeApplet.getSmiles();
+      }
     }
   </script>
 </body>
