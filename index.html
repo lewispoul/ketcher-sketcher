@@ -2,32 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Molecule Sketcher (Ketcher) + ChatGPT</title>
+  <title>Ketcher Demo (Safe Load)</title>
 
-  <!-- Include Ketcher styles -->
-  <link rel="stylesheet" href="https://lifescience.opensource.epam.com/ketcher/css/ketcher.min.css" />
-  <link rel="stylesheet" href="styles.css">
+  <!-- Load working version of Ketcher (from jsDelivr) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/epam/ketcher@latest/dist/ketcher.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/epam/ketcher@latest/dist/ketcher.min.js"></script>
 
-  <!-- Include Ketcher JS -->
-  <script src="https://lifescience.opensource.epam.com/ketcher/ketcher.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    #ketcher { width: 800px; height: 500px; border: 1px solid #ccc; }
+    button { margin-top: 10px; margin-right: 10px; }
+    textarea { width: 800px; height: 120px; margin-top: 20px; }
+  </style>
 </head>
 <body>
   <h2>🧪 Molecule Sketcher (Ketcher) + ChatGPT</h2>
-
-  <!-- Main container for the sketcher UI -->
-  <div id="ketcher" class="ketcher-container"></div>
-
+  <div id="ketcher"></div>
   <button onclick="exportMol()">Export Molfile</button>
   <button onclick="exportSmiles()">Export SMILES</button>
-
   <h3>Output:</h3>
   <textarea id="output" readonly></textarea>
 
   <script>
     let ketcher;
     window.onload = async () => {
-      ketcher = await Ketcher.create(document.getElementById('ketcher'), {
-        resourcesUrl: 'https://lifescience.opensource.epam.com/ketcher'
+      const element = document.getElementById('ketcher');
+      ketcher = await Ketcher.create(element, {
+        resourcesUrl: 'https://cdn.jsdelivr.net/gh/epam/ketcher@latest/dist'
       });
     };
 
