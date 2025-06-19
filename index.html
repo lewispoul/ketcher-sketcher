@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <title>Molecule Sketcher (JSME) + ChatGPT</title>
   <script src="https://unpkg.com/jsme-editor@latest/jsme/jsme.nocache.js"></script>
+  <script src="script.js"></script>
   <style>
     body { font-family: sans-serif; margin: 20px; }
     #jsmediv { border: 1px solid #ccc; width: 800px; height: 500px; }
-    button { margin-top: 10px; padding: 8px 12px; }
+    button { margin-top: 10px; margin-right: 10px; padding: 8px 12px; }
     textarea { width: 800px; height: 120px; margin-top: 10px; }
   </style>
 </head>
@@ -19,25 +20,5 @@
 
   <h3>Output:</h3>
   <textarea id="output" readonly></textarea>
-
-  <script>
-    let jsmeApplet;
-    function jsmeOnLoad() {
-      // Initialize on-load function for JSME
-      jsmeApplet = new JSApplet.JSME("jsmediv", "800px", "500px");
-    }
-
-    function exportMol() {
-      if (jsmeApplet) {
-        document.getElementById('output').value = jsmeApplet.getMolfile();
-      }
-    }
-
-    function exportSmiles() {
-      if (jsmeApplet) {
-        document.getElementById('output').value = jsmeApplet.getSmiles();
-      }
-    }
-  </script>
 </body>
 </html>
