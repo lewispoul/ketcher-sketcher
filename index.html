@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ketcher + ChatGPT</title>
+  <title>Molecule Sketcher (Ketcher) + ChatGPT</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://lifescience.opensource.epam.com/ketcher/ketcher.min.js"></script>
 </head>
@@ -13,6 +13,27 @@
   <button onclick="exportSmiles()">Export SMILES</button>
   <h3>Output:</h3>
   <textarea id="output" readonly></textarea>
-  <script src="script.js"></script>
+
+  <script>
+    let ketcher;
+    window.onload = async () => {
+      const element = document.getElementById('ketcher');
+      ketcher = await Ketcher.create(element, {
+        resourcesUrl: 'https://lifescience.opensource.epam.com/ketcher',
+      });
+    };
+
+    function exportMol() {
+      ketcher.getMolfile().then(mol => {
+        document.getElementById('output').value = mol;
+      });
+    }
+
+    function exportSmiles() {
+      ketcher.getSmiles().then(smiles => {
+        document.getElementById('output').value = smiles;
+      });
+    }
+  </script>
 </body>
 </html>
