@@ -1,7 +1,7 @@
 let jsmeApplet;
 
 function jsmeOnLoad() {
-  // Called automatically by JSME when ready
+  // Automatically called when JSME finishes loading
   jsmeApplet = new JSApplet.JSME("jsmediv", "800px", "500px");
 }
 
